@@ -22,7 +22,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "server": "nodemon index.js",
-    "build": "cd .. && cd client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build",
     "client": "cd client && npm run start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
