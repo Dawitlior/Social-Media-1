@@ -14,7 +14,8 @@ console.log(posts);
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    const reversedData = data.reverse();
+    dispatch(setPosts({ posts: reversedData }));
   };
 
   const getUserPosts = async () => {
