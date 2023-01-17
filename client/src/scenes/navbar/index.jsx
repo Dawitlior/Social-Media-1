@@ -39,8 +39,6 @@ const Navbar = () => {
   const alt = theme.palette.background.alt;
   const fullName = `${user.firstName} ${user.lastName}`;
 
-
-
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
@@ -111,7 +109,9 @@ const Navbar = () => {
           </FormControl>
         </FlexBetween>
       ) : (
-        <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)} >
+        <IconButton
+          onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+        >
           <Menu />
         </IconButton>
       )}

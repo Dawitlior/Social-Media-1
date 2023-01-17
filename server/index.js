@@ -9,15 +9,14 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
-import {verifyToken} from './middleware/auth.js';
-import authRoutes from './routes/auth.js';
-import userRoutes from './routes/users.js';
-import postRoutes from './routes/posts.js';
+import { verifyToken } from "./middleware/auth.js";
+import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
 import { createPost } from "./controllers/posts.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
-import {posts,users} from './data/index.js'
-
+import { posts, users } from "./data/index.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -32,7 +31,6 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -43,7 +41,6 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-
 /** ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
@@ -51,16 +48,15 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
-
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6001; 
+const PORT = process.env.PORT || 6001;
 mongoose.set("strictQuery", false);
-
-mongoose.connect(process.env.MONGO_URL, {
+mongoose
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
- .then(() => {
+  .then(() => {
     app.listen(PORT, () => {
       console.log(`server port ${PORT}`);
       // User.insertMany(users);
@@ -69,4 +65,4 @@ mongoose.connect(process.env.MONGO_URL, {
   })
   .catch((err) => {
     console.log(`${err} did not connect`);
-  }); 
+  });
