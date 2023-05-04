@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import Loading from "components/Loading";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -50,6 +51,7 @@ const Form = () => {
   const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
   const dispatch = useDispatch();
+  const [sent, isSent] = useState(false);
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
@@ -87,6 +89,7 @@ const Form = () => {
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {
+      isSent(true);
       dispatch(
         setLogin({
           user: loggedIn.user,
@@ -247,6 +250,9 @@ const Form = () => {
             >
               {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
+            <Box display="flex" alignItems="center" flexDirection="column">
+              {isSent === true ? <Loading /> : ""}
+            </Box>
             <Typography
               onClick={() => {
                 setPageType(isLogin ? "register" : "login");
