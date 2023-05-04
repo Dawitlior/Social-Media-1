@@ -46,7 +46,7 @@ This social media application is designed to let users connect with each other o
 
 
 
-## link to my web : https://social-media-front-w6ow.onrender.com
+## link to my web : https://lior-social-media.netlify.app
 for quick logIn : 
 Lior1@walla.com
 12345678
@@ -59,5 +59,4 @@ Lior1@walla.com
 
 
 
-still in process...
 
