@@ -81,26 +81,34 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch(
+    
+    try{
+      const loggedInResponse = await fetch(
       "https://backend-server-social-media.onrender.com/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       }
-    );
-    const loggedIn = await loggedInResponse.json();
-    onSubmitProps.resetForm();
-    if (loggedIn) {
-      isSent(true);
-      dispatch(
-        setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
-        })
       );
-      navigate("/home");
-    }
+      isSent(true);
+      const loggedIn = await loggedInResponse.json();
+      onSubmitProps.resetForm();
+      if (loggedIn) {
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token: loggedIn.token,
+          })
+          );
+          navigate("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      finally {
+        isSent(false);
+      }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -254,7 +262,7 @@ const Form = () => {
               {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
             <Box display="flex" alignItems="center" flexDirection="column">
-              {isSent === true ? <Loading /> : ""}
+              {isSent === true ? "Loading" : ""}
             </Box>
             <Typography
               onClick={() => {
