@@ -1,6 +1,9 @@
 # S-M-SERVER
 
 
++ for quick logIn : 
+Lior1@walla.com
+12345678
 
 ## So a little about the application,
 This social media application is designed to let users connect with each other online. The front-end part of the application uses some advanced tools to help make the app look and feel great, while the back-end part of the app uses different technologies to make sure the app is secure and fast. Overall, the app is designed to be easy to use for anyone who wants to join the community and share their thoughts and experiences with others.
@@ -47,9 +50,6 @@ This social media application is designed to let users connect with each other o
 
 
 ## link to my web : https://lior-social-media.netlify.app
-for quick logIn : 
-Lior1@walla.com
-12345678
 
 ![2023-03-21 (2)](https://user-images.githubusercontent.com/102303153/226618706-47a509bd-a4b0-40d4-a85a-a28f6101ff09.png)
 
