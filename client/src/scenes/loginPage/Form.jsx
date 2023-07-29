@@ -16,6 +16,8 @@ import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 import Loading from "components/Loading";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -48,6 +50,7 @@ const initialValuesLogin = {
 };
 
 const Form = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
   const dispatch = useDispatch();
@@ -81,15 +84,14 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    
-    try{
+    try {
       const loggedInResponse = await fetch(
-      "https://backend-server-social-media.onrender.com/auth/login",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      }
+        "https://backend-server-social-media.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        }
       );
       isSent(true);
       const loggedIn = await loggedInResponse.json();
@@ -100,15 +102,14 @@ const Form = () => {
             user: loggedIn.user,
             token: loggedIn.token,
           })
-          );
-          navigate("/home");
-        }
-      } catch (error) {
-        console.log(error);
+        );
+        navigate("/home");
       }
-      finally {
-        isSent(false);
-      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      isSent(false);
+    }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -262,7 +263,7 @@ const Form = () => {
               {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
             <Box display="flex" alignItems="center" flexDirection="column">
-              {isSent === true ? "Loading" : ""}
+              {isLoading && <CircularProgress />}
             </Box>
             <Typography
               onClick={() => {
